@@ -43,11 +43,12 @@ The program performs the following end‑to‑end steps:
      - Managed Identity when deployed
 
 2. **Creates or Updates ADF Linked Services**
-   - **On‑premises SQL Server** using a **Self‑Hosted Integration Runtime (SHIR)**
+   - **Microsoft Fabric Lakehouse** using the native **Lakehouse connector**
    - **Microsoft Fabric Lakehouse** using the native **Lakehouse connector**
 
 3. **Creates or Updates ADF Datasets**
-   - SQL Server table (source)
+      - Fabric Lakehouse table (source), with:
+     - `schema` and `table` defined **as separate properties**
    - Fabric Lakehouse table (sink), with:
      - `schema` and `table` defined **as separate properties**
 
@@ -59,7 +60,7 @@ All operations are performed using **ARM REST APIs (`2018-06-01`)** — no porta
 
 ## Architecture
 
-This solution uses **Azure Data Factory (ADF)** as the orchestration layer to move data from an **on‑premises SQL Server** into a **Microsoft Fabric Lakehouse**, explicitly targeting a **non‑default schema**.
+This solution uses **Azure Data Factory (ADF)** as the orchestration layer to move data from an **Microsoft Fabric Lakehouse** into a **Microsoft Fabric Lakehouse**, explicitly targeting a **non‑default schema**.
 
 The architecture is intentionally **code‑first** and **REST‑driven**, avoiding portal configuration and SDK abstractions.
 
@@ -70,7 +71,7 @@ The architecture is intentionally **code‑first** and **REST‑driven**, avoidi
 
 ### Components
 
-#### On‑Premises SQL Server
+#### Microsoft Fabric Lakehouse
 - Acts as the **source system**
 - Accessed via standard SQL authentication
 - Connectivity to Azure is enabled through a **Self‑Hosted Integration Runtime (SHIR)**
